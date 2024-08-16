@@ -1,7 +1,7 @@
 require("dotenv").config();
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirebase } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,6 +13,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirebase(app);
+const db = getFirestore(app);
 
 export { db };

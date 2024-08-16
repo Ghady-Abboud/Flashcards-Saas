@@ -1,5 +1,8 @@
 "use client";
 
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import getStripe from "@/utils/get-stripe";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Head from "next/head";
@@ -19,18 +22,29 @@ import {
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#A5A692",
+      main: "#F2A71B",
       light: "#025E73",
       dark: "#011F26",
     },
     secondary: {
-      main: "#F2A71B",
+      main: "#023047",
       light: "#BFB78F",
     },
   },
 });
 
 export default function Home() {
+  const { isSignedIn } = useUser();
+  const router = useRouter();
+
+  const handleGetStarted = () => {
+    if (isSignedIn) {
+      router.push('/generate');
+    } else {
+      router.push('/sign-in');
+    }
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -46,8 +60,12 @@ export default function Home() {
 
           <AppBar position="static" mx="0">
             <Toolbar>
-              <Typography variant="h6" style={{ flexGrow: 1 }}>
-                Flashcard Saas
+              <Typography 
+              variant="h6" 
+              sx={{ flexGrow: 1, cursor: 'pointer' }} 
+              onClick={() => window.location.href = '/'}
+              >
+                Flashcard SaaS
               </Typography>
               <SignedOut>
                 <Button color="inherit" href="/sign-in">
@@ -75,7 +93,7 @@ export default function Home() {
               {""}
               The easiest way to make flashcards from your text
             </Typography>
-            <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
+            <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={handleGetStarted}>
               Get Started
             </Button>
           </Box>
