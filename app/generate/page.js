@@ -5,9 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { writeBatch, doc, collection, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.js';
-import { Button, Container, Typography, Box, Paper, TextField, Grid, CardActionArea, Dialog, DialogContent, DialogActions } from '@mui/material';
+import { Button, Container, Typography, Box, Paper, TextField, Grid, CardActionArea, Dialog, DialogContent, DialogActions, DialogTitle, DialogContentText } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { transform } from 'next/dist/build/swc/index.js';
 
 const theme = createTheme({
     palette: {
