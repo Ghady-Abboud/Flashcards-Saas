@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
-import { writeBatch, doc, collection, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.js';
 import { Button, Container, Typography, Box, Paper, TextField, Grid, CardActionArea, Dialog, DialogContent, DialogActions, DialogTitle, DialogContentText } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {doc, setDoc, getDoc, writeBatch, collection} from 'firebase/firestore'; 
 
 const theme = createTheme({
     palette: {
@@ -126,9 +126,16 @@ export default function Generate() {
                     />
                     <Button
                         variant="contained"
-                        color="primary"
                         onClick={handleSubmit}
                         fullWidth
+                        sx={{
+                            backgroundColor: '#F2A71B',
+                            color: 'black',
+                            '&:hover': {
+                              backgroundColor: '#D49117', // Darker shade of #F2A71B
+                              color: 'black'
+                            }
+                          }}
                     >
                         Generate Flashcards
                     </Button>
