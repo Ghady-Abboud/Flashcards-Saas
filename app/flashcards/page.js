@@ -28,7 +28,7 @@ export default function Flashcards() {
             }
         }
         getFlashcards()
-    }), [user]
+    }, [user])
 
     if (!isLoaded || !isSignedIn) {
         return <></>
@@ -44,8 +44,8 @@ export default function Flashcards() {
             {flashcards.map((flashcard, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                     <Card>
-                        <CardActionArea onClick={()=>(handleCardClick={id})}>
-                        <CardContent>
+                        <CardActionArea onClick={()=>(handleCardClick=(flashcard.name))}>
+                        <CardContent>  
                             <Typography variant="h6">
                             {flashcard.name}
                             </Typography> 
