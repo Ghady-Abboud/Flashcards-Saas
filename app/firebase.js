@@ -1,17 +1,18 @@
+require("dotenv").config();
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getFirebase} from 'firebase/firestore'
+import { getFirebase } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: `${process.env.FIREBASE_API_KEY}`,
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "flashcards-b171e.firebaseapp.com",
   projectId: "flashcards-b171e",
   storageBucket: "flashcards-b171e.appspot.com",
   messagingSenderId: "478279926673",
-  appId: "1:478279926673:web:2cac93a98f62ae6e1cd030"
+  appId: "1:478279926673:web:2cac93a98f62ae6e1cd030",
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirebase(app)
+const db = getFirebase(app);
 
-export {db}
+export { db };
