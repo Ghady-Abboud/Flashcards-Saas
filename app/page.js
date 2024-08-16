@@ -34,6 +34,28 @@ const theme = createTheme({
 });
 
 export default function Home() {
+
+  const handleSubmit = async() => {
+    const checkoutSession = await fetch('app/api/checkout-session', {
+      method : 'POST',
+      headers: {
+        origin: 'http://localhost:3000',
+      },
+    })
+    const checkoutSessionJson = await checkoutSession.json()
+    if (checkoutSessionJson.statusCode === 500) {
+      console.error('Error:', checkoutSessionJson.message)
+      return 
+    }
+    const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id,
+    })
+    if (error) {
+      console.warn(error.message)
+    }    
+    }
+
   const { isSignedIn } = useUser();
   const router = useRouter();
 
@@ -191,8 +213,7 @@ export default function Home() {
                   <Button
                     variant="contained"
                     color="primary"
-                    sx={{ mt: 2, width: "50%", alignSelf: "center" }}
-                  >
+                    sx={{ mt: 2, width: "50%", alignSelf: "center" }} onClick={handleSubmit}>
                     Choose Pro
                   </Button>
                 </Box>
