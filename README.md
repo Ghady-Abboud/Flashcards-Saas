@@ -34,3 +34,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+API_KEYS:
+
+1. FIREBASE: https://console.firebase.google.com/u/0/ Initialize firebase app and copy api key from config file
+2. STRIPE: https://dashboard.stripe.com/test/dashboard SIGN IN -> DEVELOPERS(TOP RIGHT) -> API KEYS -> COPY SECRET AND PUB KEY
+3. CLERK: https://clerk.com/ SIGN IN -> CREATE APP -> DASHBOARD(TOP RIGHT) -> NEXT.JS -> SCROLL AND COPY PUB AND SEC KEY
+4. OPENAI: https://platform.openai.com/docs/overview
