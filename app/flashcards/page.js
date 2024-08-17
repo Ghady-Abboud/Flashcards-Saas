@@ -6,7 +6,7 @@ import { db } from "../firebase";
 import { useEffect, useState } from "react";
 
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, Typography, Container, Grid} from "@mui/material";
 
 export default function Flashcards() {
     const{ isLoaded, isSignedIn, user } = useUser();
@@ -33,7 +33,7 @@ export default function Flashcards() {
     if (!isLoaded || !isSignedIn) {
         return <></>
     }
-    const handleCardClick = (id) => {
+    function handleCardClick (id) {
         router.push(`/flashcards?id=${id}`)
     }
 

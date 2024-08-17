@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+require("dotenv").config();
 
 const systemPrompt = `
 You are a flashcard creator. Your task is to generate educational flashcards that help users learn and retain key concepts. Each flashcard should consist of a question or prompt on the front and a detailed answer or explanation on the back.
@@ -32,7 +33,10 @@ Return in the following JSON format
 `;
 
 export async function POST(req) {
-  const openai = new OpenAI();
+  const openai = new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: `${process.env.TEST_API}`,
+  });
   const data = await req.text();
 
   const completion = await openai.chat.completions.create({
@@ -40,10 +44,10 @@ export async function POST(req) {
       { role: "system", content: systemPrompt },
       { role: "user", content: data },
     ],
-    model: "gpt-4o-mini",
+    model: "openai/gpt-3.5-turbo",
     response_format: { type: "json_object" },
   });
   const flashcards = JSON.parse(completion.choices[0].message.content);
 
-  return NextResponse.json(flashcards.flashcard);
+  return NextResponse.json(flashcards);
 }

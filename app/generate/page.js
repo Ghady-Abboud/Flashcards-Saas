@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { db } from '../firebase.js';
-import { Button, Container, Typography, Box, Paper, TextField, Grid, CardActionArea, Dialog, DialogContent, DialogActions, DialogTitle, DialogContentText } from '@mui/material';
+import { Button, Container, Typography, Box, Paper, TextField, Grid, CardActionArea, Dialog, DialogContent, DialogActions, DialogTitle, DialogContentText, Card, CardContent} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {doc, setDoc, getDoc, writeBatch, collection} from 'firebase/firestore'; 
 
@@ -36,6 +36,9 @@ export default function Generate() {
             const res = await fetch('/api/generate', {
                 method: 'POST',
                 body: text,
+                headers: {
+                    "Content-Type": "application/json",
+                }
             });
             if (!res.ok) throw new Error('Failed to generate flashcards');
             const data = await res.json();
