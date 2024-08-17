@@ -35,7 +35,7 @@ Return in the following JSON format
 export async function POST(req) {
   const openai = new OpenAI({
     baseURL: "https://openrouter.ai/api/v1",
-    apiKey: `${process.env.TEST_API}`,
+    apiKey: `${process.env.TEST_API_KEY}`,
   });
   const data = await req.text();
 
