@@ -62,6 +62,7 @@ export default function Generate() {
           "Content-Type": "application/json",
         },
       });
+      console.log(res);
       if (!res.ok) throw new Error("Failed to generate flashcards");
       const data = await res.json();
       setFlashcards(data.flashcards);
