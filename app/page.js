@@ -131,31 +131,27 @@ export default function Home() {
               color="main"
               sx={{
                 textDecoration: "underline",
-                fontStyle: "italic",
               }}
             >
               Features
             </Typography>
             <Grid container spacing={4} display={"flex"} px={4}>
               <Grid item xs={12} md={4} textAlign={"center"}>
-                <Typography variant="h6">Feature1</Typography>
+                <Typography variant="h6">Easy</Typography>
                 <Typography>
-                  Simply input your text and let our software do the rest.
-                  Creating flashcards has never been easier!
+                Quickly create flashcards—just input your text, and let our tool do the rest.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={4} textAlign={"center"}>
-                <Typography variant="h6">Feature2</Typography>
+                <Typography variant="h6">Efficient</Typography>
                 <Typography>
-                  Simply input your text and let our software do the rest.
-                  Creating flashcards has never been easier!
+                Streamlined input process for fast and productive study prep.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={4} textAlign={"center"}>
-                <Typography variant="h6">Feature3</Typography>
+                <Typography variant="h6">Customizable</Typography>
                 <Typography>
-                  Simply input your text and let our software do the rest.
-                  Creating flashcards has never been easier!
+                Tailor your flashcards to suit your needs.
                 </Typography>
               </Grid>
             </Grid>
