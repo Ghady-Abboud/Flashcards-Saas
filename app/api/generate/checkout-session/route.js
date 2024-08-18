@@ -24,6 +24,7 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
+  const { subscriptionName, subscriptionValue } = await req.json();
   const params = {
     mode: "subscription",
     payment_method_types: ["card"],
@@ -32,9 +33,9 @@ export async function POST(req) {
         price_data: {
           currency: "usd",
           product_data: {
-            name: "Pro Subscription",
+            name: subscriptionName,
           },
-          unit_amount: formatAmountForStripe(10),
+          unit_amount: formatAmountForStripe(subscriptionValue),
           recurring: {
             interval: "month",
             interval_count: 1,

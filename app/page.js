@@ -33,24 +33,34 @@ const theme = createTheme({
 });
 
 export default function Home() {
-  const handleSubmit = async () => {
-    const checkoutSession = await fetch("api/generate/checkout-session", {
-      method: "POST",
-      headers: {
-        origin: "http://localhost:3000",
-      },
-    });
-    const checkoutSessionJson = await checkoutSession.json();
-    if (checkoutSessionJson.statusCode === 500) {
-      console.error("Error:", checkoutSessionJson.message);
-      return;
-    }
-    const stripe = await getStripe();
-    const { res } = await stripe.redirectToCheckout({
-      sessionId: checkoutSessionJson.id,
-    });
-    if (!res.ok) {
-      console.warn(error.message);
+  const handleSubmit = async (subscriptionName, subscriptionValue) => {
+    try {
+      const checkoutSession = await fetch("api/generate/checkout-session", {
+        method: "POST",
+        headers: {
+          origin: "http://localhost:3000",
+        },
+        body: JSON.stringify({
+          subscriptionName: subscriptionName,
+          subscriptionValue: subscriptionValue,
+        }),
+      });
+
+      console.log(checkoutSession);
+      const checkoutSessionJson = await checkoutSession.json();
+      if (checkoutSessionJson.statusCode === 500) {
+        console.error("Error:", checkoutSessionJson.message);
+        return;
+      }
+      const stripe = await getStripe();
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: checkoutSessionJson.id,
+      });
+      if (error) {
+        console.error(error);
+      }
+    } catch (err) {
+      console.error("Error handling checkout session:", err);
     }
   };
 
@@ -172,6 +182,10 @@ export default function Home() {
                     border: "1px solid",
                     borderColor: "grey",
                     borderRadius: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "100%",
                   }}
                 >
                   <Typography variant="h5" gutterBottom>
@@ -188,7 +202,7 @@ export default function Home() {
                     variant="contained"
                     color="primary"
                     sx={{ mt: 2, width: "50%", alignSelf: "center" }}
-                    onClick={handleSubmit}
+                    onClick={() => handleSubmit("Basic Subscription", 0.5)}
                   >
                     Choose Basic
                   </Button>
@@ -218,7 +232,7 @@ export default function Home() {
                     variant="contained"
                     color="primary"
                     sx={{ mt: 2, width: "50%", alignSelf: "center" }}
-                    onClick={handleSubmit}
+                    onClick={() => handleSubmit("Pro Subscription", 1)}
                   >
                     Choose Pro
                   </Button>
@@ -231,6 +245,10 @@ export default function Home() {
                     border: "1px solid",
                     borderColor: "grey",
                     borderRadius: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "100%",
                   }}
                 >
                   <Typography variant="h5" gutterBottom>
@@ -247,7 +265,9 @@ export default function Home() {
                     variant="contained"
                     color="primary"
                     sx={{ mt: 2, alignSelf: "center" }}
-                    onClick={handleSubmit}
+                    onClick={() =>
+                      handleSubmit("Premium Pro Subscription", 1.5)
+                    }
                   >
                     Choose Premium
                   </Button>
