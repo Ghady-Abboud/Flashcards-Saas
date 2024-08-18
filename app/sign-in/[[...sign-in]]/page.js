@@ -7,18 +7,18 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#F2A71B",
-        light: "#025E73",
-        dark: "#011F26",
-      },
-      secondary: {
-        main: "#023047",
-        light: "#BFB78F",
-      },
+  palette: {
+    primary: {
+      main: "#FF6F61",
+      light: "#FFA07A",
+      dark: "#D9534F",
     },
-  });
+    secondary: {
+      main: "#4A4E69",
+      light: "#9A8C98",
+    },
+  },
+});
   
   export default function SignInPage() {
     return (
