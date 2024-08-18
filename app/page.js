@@ -133,6 +133,9 @@ export default function Home() {
             </Button>
           </Box>
           <Box sx={{ my: 6 }}>
+            <Box>
+              
+            </Box>
             <Typography
               variant="h4"
               component="h2"
@@ -152,7 +155,7 @@ export default function Home() {
             >
               Features
             </Typography>
-            <Grid container spacing={4} display={"flex"} px={4}>
+            <Grid container spacing={4} display={"flex"} px={4} py={2}>
               <Grid item xs={12} md={4} textAlign={"center"}>
                 <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#4A4E69' }}>Easy</Typography>
                 <Typography>
@@ -232,13 +235,15 @@ export default function Home() {
                 <Box
                   sx={{
                     p: 3,
-                    border: "1px solid",
+                    border: "1px solid #D9534F",
                     borderColor: "grey",
                     borderRadius: 2,
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
                     height: "100%",
+                    backgroundColor: '#FFFFFF',
+                    '&:hover': { backgroundColor: '#FFA07A' },
                   }}
                 >
                   <Typography variant="h5" gutterBottom>
@@ -262,13 +267,15 @@ export default function Home() {
                 <Box
                   sx={{
                     p: 3,
-                    border: "1px solid",
+                    border: "1px solid #D9534F",
                     borderColor: "grey",
                     borderRadius: 2,
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
                     height: "100%",
+                    backgroundColor: '#FFFFFF',
+                    '&:hover': { backgroundColor: '#FFA07A' },
                   }}
                 >
                   <Typography variant="h5" gutterBottom>
