@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import getStripe from "@/utils/get-stripe";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Head from "next/head";
@@ -34,36 +33,35 @@ const theme = createTheme({
 });
 
 export default function Home() {
-
-  const handleSubmit = async() => {
-    const checkoutSession = await fetch('app/api/checkout-session', {
-      method : 'POST',
+  const handleSubmit = async () => {
+    const checkoutSession = await fetch("api/generate/checkout-session", {
+      method: "POST",
       headers: {
-        origin: 'http://localhost:3000',
+        origin: "http://localhost:3000",
       },
-    })
-    const checkoutSessionJson = await checkoutSession.json()
+    });
+    const checkoutSessionJson = await checkoutSession.json();
     if (checkoutSessionJson.statusCode === 500) {
-      console.error('Error:', checkoutSessionJson.message)
-      return 
+      console.error("Error:", checkoutSessionJson.message);
+      return;
     }
-    const stripe = await getStripe()
-    const {error} = await stripe.redirectToCheckout({
+    const stripe = await getStripe();
+    const { res } = await stripe.redirectToCheckout({
       sessionId: checkoutSessionJson.id,
-    })
-    if (error) {
-      console.warn(error.message)
-    }    
+    });
+    if (!res.ok) {
+      console.warn(error.message);
     }
+  };
 
   const { isSignedIn } = useUser();
   const router = useRouter();
 
   const handleGetStarted = () => {
     if (isSignedIn) {
-      router.push('/generate');
+      router.push("/generate");
     } else {
-      router.push('/sign-in');
+      router.push("/sign-in");
     }
   };
 
@@ -82,10 +80,10 @@ export default function Home() {
 
           <AppBar position="static" mx="0">
             <Toolbar>
-              <Typography 
-              variant="h6" 
-              sx={{ flexGrow: 1, cursor: 'pointer' }} 
-              onClick={() => window.location.href = '/'}
+              <Typography
+                variant="h6"
+                sx={{ flexGrow: 1, cursor: "pointer" }}
+                onClick={() => (window.location.href = "/")}
               >
                 Flashcard SaaS
               </Typography>
@@ -115,7 +113,12 @@ export default function Home() {
               {""}
               The easiest way to make flashcards from your text
             </Typography>
-            <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={handleGetStarted}>
+            <Button
+              variant="contained"
+              color="secondary"
+              sx={{ mt: 2 }}
+              onClick={handleGetStarted}
+            >
               Get Started
             </Button>
           </Box>
@@ -185,6 +188,7 @@ export default function Home() {
                     variant="contained"
                     color="primary"
                     sx={{ mt: 2, width: "50%", alignSelf: "center" }}
+                    onClick={handleSubmit}
                   >
                     Choose Basic
                   </Button>
@@ -213,7 +217,9 @@ export default function Home() {
                   <Button
                     variant="contained"
                     color="primary"
-                    sx={{ mt: 2, width: "50%", alignSelf: "center" }} onClick={handleSubmit}>
+                    sx={{ mt: 2, width: "50%", alignSelf: "center" }}
+                    onClick={handleSubmit}
+                  >
                     Choose Pro
                   </Button>
                 </Box>
@@ -241,6 +247,7 @@ export default function Home() {
                     variant="contained"
                     color="primary"
                     sx={{ mt: 2, alignSelf: "center" }}
+                    onClick={handleSubmit}
                   >
                     Choose Premium
                   </Button>
